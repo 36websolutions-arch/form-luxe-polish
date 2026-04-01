@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-main.webp";
-import productHoodie from "@/assets/product-hoodie-v2.jpg";
-import productTee from "@/assets/product-tee-v3.jpg";
+import productHoodie from "@/assets/product-hoodie-v4.png";
+import productTee from "@/assets/product-tee-v4.webp";
 import productSweatpants from "@/assets/product-sweatpants.webp";
 import lookbook1 from "@/assets/lookbook-1.webp";
 import lookbook2 from "@/assets/lookbook-2.webp";
 import lookbook3 from "@/assets/lookbook-3.webp";
 import editorialHoodieBack from "@/assets/editorial-hoodie-back.webp";
+import womenImage1 from "@/assets/women-editorial-1.webp";
+import womenImage2 from "@/assets/women-editorial-2.webp";
 import ProductCard from "@/components/ProductCard";
 
 const Index = () => {
@@ -38,20 +40,46 @@ const Index = () => {
         </p>
       </section>
 
-      {/* Shop the Essentials */}
-      <section className="px-6 lg:px-16 pb-24">
-        <p className="text-xs tracking-widest text-muted-foreground uppercase font-body text-center mb-12">
-          Shop the Essentials
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <ProductCard image={productTee} name="FORM Tee" subtitle="Signature Piece" price={85} category="T-Shirts" />
-          <ProductCard image={productHoodie} name="FORM Heavyweight Hoodie" subtitle="Signature Hoodie" price={165} category="Hoodies" />
-          <ProductCard image={productSweatpants} name="FORM Sweatpants" price={145} category="Sweatpants" />
+      {/* Shop the Collection */}
+      <section className="px-6 lg:px-16 bg-secondary">
+        <div className="py-20">
+          <h2 className="text-xs md:text-sm tracking-widest text-foreground uppercase font-body text-center mb-16 font-semibold">
+            Shop the Collection
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {[
+              { image: productHoodie, name: "Form Hoodie", subtitle: "Signature Piece", slug: "heavyweight-hoodie" },
+              { image: productTee, name: "Form Tee", subtitle: "", slug: "form-tee" },
+              { image: productSweatpants, name: "Form Sweatpants", subtitle: "", slug: "form-sweatpants" },
+            ].map((product) => (
+              <div key={product.name} className="flex flex-col items-center text-center">
+                <div className="w-full aspect-[4/5] overflow-hidden mb-5">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <h3 className="text-[11px] font-body font-semibold text-foreground/70 tracking-widest uppercase">{product.name}</h3>
+                {product.subtitle && (
+                  <p className="text-sm text-muted-foreground font-display italic mt-1 mb-3">{product.subtitle}</p>
+                )}
+                {!product.subtitle && <div className="mb-4" />}
+                <Link
+                  to={`/product/${product.slug}`}
+                  className="border border-muted-foreground/40 px-8 py-2.5 text-[10px] tracking-widest text-foreground uppercase font-body hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Shop Now
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Lookbook Preview */}
-      <section className="px-6 lg:px-16 pb-24">
+      <section className="px-6 lg:px-16 py-24">
         <p className="text-xs tracking-widest text-muted-foreground uppercase font-body text-center mb-12">
           Lookbook
         </p>
@@ -83,6 +111,25 @@ const Index = () => {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* FORM Women */}
+      <section className="py-24 px-6 lg:px-16 text-center">
+        <p className="text-xs tracking-widest text-muted-foreground uppercase font-body mb-6">Introducing</p>
+        <h2 className="text-4xl md:text-5xl font-display italic text-foreground mb-4">FORM Women</h2>
+        <p className="text-sm font-display italic text-muted-foreground mb-16">
+          Designed for strength, presence, and femininity.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+          <img src={womenImage1} alt="FORM Women" loading="lazy" className="w-full aspect-[3/4] object-cover" />
+          <img src={womenImage2} alt="FORM Women" loading="lazy" className="w-full aspect-[3/4] object-cover" />
+        </div>
+        <p className="text-sm text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mt-12 mb-8">
+          A refined, feminine extension of the FORM identity. Clean silhouettes, neutral tones, and premium fabrics — designed with the same intention and elevated simplicity.
+        </p>
+        <button className="border border-muted-foreground/40 px-10 py-3 text-xs tracking-widest text-foreground uppercase font-body hover:bg-foreground hover:text-background transition-colors">
+          Coming Soon
+        </button>
       </section>
 
       {/* Features */}

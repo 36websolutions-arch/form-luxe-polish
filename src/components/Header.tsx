@@ -30,6 +30,16 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showSolid ? "bg-background border-b border-border" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16">
+        {/* Mobile: hamburger left */}
+        <div className="md:hidden flex items-center w-10">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}
+          >
+            {mobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
+          </button>
+        </div>
+
         <Link to="/" className="flex flex-col items-center leading-none">
           <span className={`text-lg font-body font-semibold tracking-widest-xl ${showSolid ? "text-foreground" : "text-primary-foreground"}`}>
             F O R M
@@ -58,7 +68,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center w-10 justify-end">
           <Sheet>
             <SheetTrigger asChild>
               <button className={`relative ${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}>
@@ -147,13 +157,6 @@ const Header = () => {
             )}
           </SheetContent>
         </Sheet>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden ${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}
-          >
-            {mobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
-          </button>
         </div>
       </div>
 
