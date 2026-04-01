@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'],
-        body: ['"Inter"', 'sans-serif'],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
+        body: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,12 +51,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "hsl(var(--gold))",
-        "gold-light": "hsl(var(--gold-light))",
-        cream: "hsl(var(--cream))",
-        "cream-dark": "hsl(var(--cream-dark))",
-        charcoal: "hsl(var(--charcoal))",
-        "warm-gray": "hsl(var(--warm-gray))",
+        brand: {
+          cream: "hsl(var(--brand-cream))",
+          dark: "hsl(var(--brand-dark))",
+          warm: "hsl(var(--brand-warm))",
+          charcoal: "hsl(var(--brand-charcoal))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -73,6 +73,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      letterSpacing: {
+        'widest-xl': '0.25em',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -82,20 +85,15 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
         "fade-in": {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.8s ease-out forwards",
-        "fade-in": "fade-in 1s ease-out forwards",
+        "fade-in": "fade-in 0.8s ease-out forwards",
       },
     },
   },

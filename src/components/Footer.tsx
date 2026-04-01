@@ -1,58 +1,45 @@
-const footerLinks = {
-  Shop: ["New Arrivals", "Essentials", "All Products", "Gift Cards"],
-  Help: ["FAQ", "Shipping", "Returns", "Contact"],
-  About: ["Our Story", "Sustainability", "Careers", "Press"],
-};
+import { Link } from "react-router-dom";
+import { Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border px-6 md:px-12 lg:px-16 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
-          <div className="col-span-2 md:col-span-1">
-            <span className="text-lg tracking-[0.35em] font-body font-medium text-foreground uppercase">
-              FORM
-            </span>
-            <p className="font-body text-xs text-muted-foreground mt-4 leading-relaxed max-w-[200px]">
-              Elevated essentials for the modern individual.
-            </p>
+    <footer className="bg-background border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Logo */}
+          <div className="flex flex-col items-center md:items-start leading-none">
+            <span className="text-lg font-body font-semibold tracking-widest-xl text-foreground">F O R M</span>
           </div>
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4 className="text-[10px] tracking-luxury font-body text-foreground mb-5">
-                {title}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+          {/* Tagline */}
+          <p className="text-xs tracking-widest text-muted-foreground font-body uppercase">
+            Minimal. Luxury. Los Angeles.
+          </p>
+
+          {/* Social + Subscribe */}
+          <div className="flex items-center gap-6">
+            <span className="text-xs tracking-wider text-muted-foreground uppercase">Follow Us</span>
+            <a href="#" className="text-foreground hover:opacity-60 transition-opacity">
+              <Instagram size={18} strokeWidth={1.5} />
+            </a>
+            <Link
+              to="/contact"
+              className="border border-foreground px-5 py-2 text-xs tracking-wider text-foreground font-body uppercase hover:bg-foreground hover:text-background transition-colors"
+            >
+              Subscribe
+            </Link>
+          </div>
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-body text-[10px] text-muted-foreground tracking-wide">
-            © 2026 FORM. All rights reserved.
-          </p>
-          <div className="flex gap-8">
-            {["Privacy", "Terms", "Cookies"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="font-body text-[10px] text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-              >
-                {link}
-              </a>
+        <div className="mt-10 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex gap-6">
+            {["Contact", "FAQ", "Policies"].map((item) => (
+              <Link key={item} to="#" className="text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors uppercase font-body">
+                {item}
+              </Link>
             ))}
           </div>
+          <p className="text-xs text-muted-foreground font-body">© 2026 FORM. All rights reserved.</p>
         </div>
       </div>
     </footer>
