@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingBag, Minus, Plus, X } from "lucide-react";
+import { ShoppingBag, Minus, Plus, X, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import {
@@ -14,6 +14,7 @@ const Header = () => {
   const location = useLocation();
   const isHeroPage = location.pathname === "/" || location.pathname === "/lookbook";
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { items, totalItems, removeItem, addItem } = useCart();
 
   useEffect(() => {
@@ -57,17 +58,18 @@ const Header = () => {
           ))}
         </nav>
 
-        <Sheet>
-          <SheetTrigger asChild>
-            <button className={`relative ${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}>
-              <ShoppingBag size={20} strokeWidth={1.5} />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 w-5 h-5 bg-foreground text-background text-[10px] font-body font-semibold rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </button>
-          </SheetTrigger>
+        <div className="flex items-center gap-4">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className={`relative ${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}>
+                <ShoppingBag size={20} strokeWidth={1.5} />
+                {totalItems > 0 && (
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-foreground text-background text-[10px] font-body font-semibold rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </SheetTrigger>
           <SheetContent className="flex flex-col w-full sm:max-w-md">
             <SheetHeader>
               <SheetTitle className="text-sm tracking-widest font-body font-semibold uppercase">
@@ -145,7 +147,40 @@ const Header = () => {
             )}
           </SheetContent>
         </Sheet>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`md:hidden ${showSolid ? "text-foreground" : "text-primary-foreground"} hover:opacity-60 transition-opacity`}
+          >
+            {mobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className={`md:hidden border-t border-border ${showSolid ? "bg-background" : "bg-background"}`}>
+          <nav className="flex flex-col px-6 py-4 space-y-4">
+            {[
+              { label: "SHOP", path: "/shop" },
+              { label: "LOOKBOOK", path: "/lookbook" },
+              { label: "ABOUT", path: "/about" },
+              { label: "CONTACT", path: "/contact" },
+            ].map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-xs tracking-widest font-body font-medium transition-opacity hover:opacity-60 text-foreground ${
+                  location.pathname === item.path ? "opacity-100" : "opacity-60"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
